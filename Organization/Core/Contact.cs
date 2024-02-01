@@ -6,10 +6,6 @@ namespace Organization.Core;
 public class Contact
 {
     /// <summary>
-    /// Unique identifier.
-    /// </summary>
-    public string Id { get; set; }
-    /// <summary>
     /// Contact method, i.e. <i>Phone</i>.
     /// </summary>
     public ContactMethod Method { get; set; }
