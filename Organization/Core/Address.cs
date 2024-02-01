@@ -26,7 +26,7 @@ public class Address
     /// </summary>
     public string Number { get; set; }
     /// <summary>
-    /// Additional details of the address, i.e. <i>Apartament 3, Door 4A</i>.
+    /// Additional details of the address, i.e. <i>Apartment 3, Door 4A</i>.
     /// </summary>
     public string? Additional { get; set; }
     /// <summary>
