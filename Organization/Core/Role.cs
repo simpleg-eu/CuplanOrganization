@@ -5,6 +5,9 @@ namespace Organization.Core;
 /// </summary>
 public class Role
 {
+    /// <summary>
+    /// Name of the role, i.e. <i>admin</i>.
+    /// </summary>
     public string Name { get; set; }
     /// <summary>
     /// Permissions given to the role, i.e. <i>create:invitation_code, read:invitation_code</i>
