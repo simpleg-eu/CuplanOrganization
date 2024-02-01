@@ -6,6 +6,10 @@ namespace Organization.Core;
 public class Link
 {
     /// <summary>
+    /// Unique identifier.
+    /// </summary>
+    public string Id { get; set; }
+    /// <summary>
     /// Name of the link, i.e. <i>Website</i>.
     /// </summary>
     public string Name { get; set; }
