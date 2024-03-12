@@ -39,6 +39,7 @@ jobs:
           cd ../
           dotnet test CuplanOrganization.sln
   cd:
+    needs: ci
     runs-on: ubuntu-latest
     
     timeout-minutes: 10
