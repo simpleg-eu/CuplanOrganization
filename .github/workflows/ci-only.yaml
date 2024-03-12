@@ -1,0 +1,47 @@
+name: CI only
+
+on:
+  push:
+    branches-ignore:
+      - main
+  pull_request:
+
+env:
+  DOTNET_DOWNLOAD_URL: "https://dotnetcli.azureedge.net/dotnet/Sdk/8.0.202/dotnet-sdk-8.0.202-linux-x64.tar.gz"
+  DOTNET_FILE: "dotnet-sdk-8.0.202-linux-x64.tar.gz"
+  SECRETS_MANAGER_ACCESS_TOKEN: ${{ secrets.SECRETS_MANAGER_ACCESS_TOKEN }}
+
+jobs:
+  ci-only:
+    runs-on: ubuntu-latest
+    
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+      - name: Download & install .NET SDK
+        run: |
+          mkdir dotnet
+          cd dotnet
+          curl -LO ${{ env.DOTNET_DOWNLOAD_URL }}
+          tar zxf ${{ env.DOTNET_FILE }}
+          rm -R ${{ env.DOTNET_FILE }}
+          cd ../
+          sudo rm -R /usr/share/dotnet
+          sudo mv -f ./dotnet /usr/share/
+      - name: Replace placeholder version
+        run: |
+          sed -i 's/5123.0.0/${{ vars.MAJOR_VERSION }}.${{ vars.MINOR_VERSION }}.${{ env.PATCH_VERSION }}/' ./Organization/Organization.csproj
+        env:
+          PATCH_VERSION: ${{ github.run_number }}
+      - name: Run tests
+        run: |
+          mkdir bin
+          cd bin
+          curl -LO https://github.com/bitwarden/sdk/releases/download/bws-v0.3.0/bws-x86_64-unknown-linux-gnu-0.3.0.zip
+          unzip bws-x86_64-unknown-linux-gnu-0.3.0.zip
+          chmod +x bws
+          export PATH=$PATH:$PWD
+          cd ../
+          dotnet test CuplanOrganization.sln
