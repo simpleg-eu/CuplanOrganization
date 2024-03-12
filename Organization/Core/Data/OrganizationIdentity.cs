@@ -20,6 +20,7 @@ public class OrganizationIdentity
     /// <summary>
     /// Contact methods of the organization.
     /// </summary>
+    public OrganizationPolicy Policy { get; }
     public IEnumerable<ContactMethod> ContactMethods { get; set; }
     /// <summary>
     /// Links of the organization.

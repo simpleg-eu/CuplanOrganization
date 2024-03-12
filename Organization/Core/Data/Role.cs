@@ -6,6 +6,10 @@ namespace Organization.Core;
 public class Role
 {
     /// <summary>
+    /// Unique identifier of the role.
+    /// </summary>
+    public string Id { get; set; }
+    /// <summary>
     /// Name of the role, i.e. <i>admin</i>.
     /// </summary>
     public string Name { get; set; }
