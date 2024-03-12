@@ -39,13 +39,14 @@ jobs:
           cd ../
           dotnet test CuplanOrganization.sln
   cd:
+    needs: ci
     runs-on: ubuntu-latest
     
     timeout-minutes: 10
     
     env:
       REGISTRY: ghcr.io
-      IMAGE_NAME: "cuplan-organization"
+      IMAGE_NAME: ${{ github.repository }}
     
     steps:
       - name: Checkout code
